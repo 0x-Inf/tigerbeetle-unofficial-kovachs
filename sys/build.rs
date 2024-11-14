@@ -14,6 +14,11 @@ use syn::visit::Visit;
 
 const TIGERBEETLE_RELEASE: &str = "0.16.11";
 
+/// Commit hash of [TigerBeetle] release.
+///
+/// [TigerBeetle]: https://github.com/tigerbeetle/tigerbeetle
+const TIGERBEETLE_COMMIT: &str = "73bbc1a32ba2513e369764680350c099fe302285";
+
 fn target_to_lib_dir(target: &str) -> Option<&'static str> {
     match target {
         "aarch64-unknown-linux-gnu" => Some("aarch64-linux-gnu"),
@@ -107,6 +112,7 @@ fn main() {
         .arg(format!("-Dconfig-log-level={log_level}"))
         .arg(format!("-Dconfig-release={TIGERBEETLE_RELEASE}"))
         .arg(format!("-Dconfig-release-client-min={TIGERBEETLE_RELEASE}"))
+        .arg(format!("-Dgit-commit={TIGERBEETLE_COMMIT}"))
         .current_dir(&tigerbeetle_root)
         .status()
         .expect("running `zig build` subcommand");
